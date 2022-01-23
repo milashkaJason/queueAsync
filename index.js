@@ -27,6 +27,7 @@ class Parallel {
                 await step(this.callBack);
             };
             this.queue.push(fnc);
+            Parallel.result.push(step.name)
             this.next();
         });
 
@@ -35,7 +36,6 @@ class Parallel {
 
     callBack(arg) {
         ++Parallel.callBackCount
-        Parallel.result.push(arg)
     }
 
     done(onDone) {
@@ -57,19 +57,19 @@ const runner = new Parallel({
 
 
 function step1(done) {
-    setTimeout(done, 2000, "step1");
+    setTimeout(done, 100, "step1");
 }
 
 function step2(done) {
-    setTimeout(done, 200, "step2");
+    setTimeout(done, 10, "step2");
 }
 
 function step3(done) {
-    setTimeout(done, 3000, "step3");
+    setTimeout(done, 150, "step3");
 }
 
 function step4(done) {
-    setTimeout(done, 1000, "step4");
+    setTimeout(done, 50, "step4");
 }
 
 function onDone(results) {
